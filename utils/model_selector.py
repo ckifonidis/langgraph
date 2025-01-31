@@ -34,7 +34,7 @@ class ModelType(Enum):
 class ModelConfig:
     model_name: str
     base_url: Optional[str] = None
-    temperature: float = 0
+    temperature: float = 1
     streaming: bool = False
 
 DEFAULT_CONFIGS = {
@@ -59,7 +59,7 @@ def use_model(
     model_name: Optional[str] = None,
     temperature: Optional[float] = None,
     streaming: Optional[bool] = None
-) -> Any:
+) -> BaseChatModel:
     """
     Factory function to create a chat model instance based on the provider.
     

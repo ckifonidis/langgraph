@@ -4,7 +4,7 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph_recipes.common.simple_graph_agent import Agent
 from utils.model_selector import use_model, ModelType
 
-tool = TavilySearchResults(max_results=4) #increased number of results
+tool = TavilySearchResults(max_results=1) #increased number of results
 
 
 
@@ -19,3 +19,6 @@ If you need to look up some information before asking a follow up question, you 
 abot = Agent(model, [tool], system=prompt)
 messages = [HumanMessage(content="What is the capital of France and the capital for Greece?")]
 result = abot.graph.invoke({'messages': messages})
+print("\nConversation:")
+for message in result['messages']:
+    print(f"{message.type}: {message.content}")

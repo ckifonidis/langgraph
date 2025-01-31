@@ -17,6 +17,7 @@ class Agent:
         self.system: str = system
         graph = StateGraph(AgentState)
         graph.add_node("llm", self.call_openai)
+        graph.add_node("llm2", self.call_openai)
         graph.add_node("action", self.take_action)
         graph.add_conditional_edges(
             "llm",
