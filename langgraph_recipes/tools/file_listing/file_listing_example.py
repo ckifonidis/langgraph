@@ -1,7 +1,7 @@
 from langchain_core.messages import HumanMessage
 from utils.model_selector import use_model, ModelType
-from langgraph_recipes.common.simple_graph_agent import Agent
-from langgraph_recipes.tools.file_tools import ListFilesTool
+from langgraph_recipes.common.agents.single_tool_usage_agent import Agent
+from langgraph_recipes.tools.file_listing.file_tools import ListFilesTool
 
 def main():
     # Initialize the list files tool

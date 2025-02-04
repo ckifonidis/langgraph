@@ -1,6 +1,6 @@
 from langchain_core.messages import HumanMessage
-from langgraph_recipes.common.simple_graph_agent import Agent
-from langgraph_recipes.tools.calculator import Calculator
+from langgraph_recipes.common.agents.single_tool_usage_agent import Agent
+from langgraph_recipes.tools.calculator.calculator import Calculator
 from utils.model_selector import use_model, ModelType
 
 # Initialize the calculator tool

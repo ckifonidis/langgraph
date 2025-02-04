@@ -1,9 +1,9 @@
 from utils import model_selector
 from pprint import pprint
-from langgraph_recipes.common.agent_simple import Agent
+from langgraph_recipes.common.agents.agent_simple import Agent
 
 def main():
-    model = model_selector.use_model(model_selector.ModelType.OPENAI)
+    model = model_selector.use_model(model_selector.ModelType.OPENAI, None, 1, None)
     agent = Agent(model)
     
     print("Start chatting with the AI (type 'exit' to end the conversation)")

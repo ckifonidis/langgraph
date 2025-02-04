@@ -1,7 +1,7 @@
 from langchain_core.messages import HumanMessage
 from langchain_community.tools.tavily_search import TavilySearchResults
 
-from langgraph_recipes.common.simple_graph_agent import Agent
+from langgraph_recipes.common.agents.single_tool_usage_agent import Agent
 from utils.model_selector import use_model, ModelType
 
 tool = TavilySearchResults(max_results=1) #increased number of results

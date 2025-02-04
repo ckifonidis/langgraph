@@ -39,7 +39,7 @@ class ModelConfig:
 
 DEFAULT_CONFIGS = {
     ModelType.OPENAI: ModelConfig(
-        model_name=OpenAIModels.GPT_3_5
+        model_name=OpenAIModels.GPT_4
     ),
     ModelType.DEEPSEEK: ModelConfig(
         model_name=DeepseekModels.CHAT,
