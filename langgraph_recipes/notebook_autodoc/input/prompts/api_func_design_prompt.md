@@ -42,6 +42,8 @@ Provide the output in Markdown format.
 Source tables are the tables the query expects to be present when it get executed.
 Identify the related table description and create the relevant documentation in the following format:
 
+
+### Table Name
 | Column Name | Column Data Type |
 |:------------|:-----------------|
 
@@ -57,7 +59,8 @@ Document this for each source table with the following format:
 
 For each of the intermediate tables insert/update logic provide the data in the following format:
 
-Target Column | Data Type | Transformation Logic | Source Table | Source Column | Group By
+| Target Column | Data Type | Transformation Logic | Source Table | Source Column | Group By |
+|:-------------|:-------------|:--------------------|-------------|---------------|----------|
 
 The group by will be populated if the there is grouping on that column.
 

@@ -71,14 +71,31 @@ def process_notebook(notebook_path: str) -> None:
         file.write(content)
     pprint(content)
 
-def main() -> None:
-    """Process all Python notebooks in the merchant promotion insights directory."""
-    # Find all Python files in the notebooks directory
-    for filename in os.listdir(NOTEBOOKS_DIR):
-        if filename.endswith('.py'):
-            notebook_path = os.path.join(NOTEBOOKS_DIR, filename)
-            print(f"\nProcessing notebook: {filename}")
-            process_notebook(notebook_path)
+def main(single_file: str = None) -> None:
+    """Process Python notebooks in the merchant promotion insights directory.
+    
+    Args:
+        single_file (str, optional): Path to a single Python file to process.
+            If not provided, processes all Python files in NOTEBOOKS_DIR.
+    """
+    if single_file:
+        if not os.path.exists(single_file):
+            raise FileNotFoundError(f"File not found: {single_file}")
+        if not single_file.endswith('.py'):
+            raise ValueError("Only Python files (.py) are supported")
+        print(f"\nProcessing single notebook: {os.path.basename(single_file)}")
+        process_notebook(single_file)
+    else:
+        # Process all Python files in the notebooks directory
+        for filename in os.listdir(NOTEBOOKS_DIR):
+            if filename.endswith('.py'):
+                notebook_path = os.path.join(NOTEBOOKS_DIR, filename)
+                print(f"\nProcessing notebook: {filename}")
+                process_notebook(notebook_path)
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1:
+        main(sys.argv[1])
+    else:
+        main()
