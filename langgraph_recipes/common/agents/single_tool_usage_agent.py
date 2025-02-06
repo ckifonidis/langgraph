@@ -46,12 +46,6 @@ class Agent:
         message = self.model.invoke(messages)
         return {'messages': [message]}
 
-    def take_action(self, state: AgentState) -> Dict[str, List[BaseMessage]]:
-        last_message = state['messages'][-1]
-        if not isinstance(last_message, AIMessage):
-            return {'messages': []}
-            
-        tool_calls = last_message.tool_calls
     def take_action(self, state: AgentState) -> AgentState:
         tool_calls = state['messages'][-1].tool_calls
         results = []
