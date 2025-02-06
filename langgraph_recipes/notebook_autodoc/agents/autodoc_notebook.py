@@ -10,14 +10,24 @@ from utils.model_selector import use_model, ModelType, OpenAIModels
 load_dotenv()
 
 # Define path constants
-BASE_PATH = 'databricks_notebook/merchant_insights/api'
-SYSTEM_PROMPT_PATH = os.path.join('/home/ckifonidis/ai/langgraph/langgraph_recipes/notebook_autodoc/input/prompts/api_func_design_prompt.md')
-NOTEBOOKS_DIR = os.path.join('/home/ckifonidis/ai/langgraph/langgraph_recipes/notebook_autodoc/input/notebooks/merchant_promotion_insights')
-TABLE_DESCRIPTIONS_DIR = os.path.join('/home/ckifonidis/ai/langgraph/langgraph_recipes/notebook_autodoc/input/table_descriptions')
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUTPUT_DIR = os.path.join(ROOT_DIR, '__output__')
+SYSTEM_PROMPT_PATH = os.path.join(ROOT_DIR, 'notebook_autodoc', 'input', 'prompts', 'api_func_design_prompt.md')
+NOTEBOOKS_DIR = os.path.join(ROOT_DIR, 'notebook_autodoc', 'input', 'notebooks', 'merchant_promotion_insights')
+TABLE_DESCRIPTIONS_DIR = os.path.join(ROOT_DIR, 'notebook_autodoc', 'input', 'table_descriptions')
+
+# Create output directory if it doesn't exist
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def process_notebook(notebook_path: str) -> None:
     """Process a single notebook and generate its documentation."""
-    output_path = os.path.join(os.path.dirname(notebook_path), 
+    # Get relative path from project root
+    rel_path = os.path.relpath(os.path.dirname(notebook_path), ROOT_DIR)
+    # Create output directory structure
+    output_dir = os.path.join(OUTPUT_DIR, rel_path)
+    os.makedirs(output_dir, exist_ok=True)
+    # Create output file path
+    output_path = os.path.join(output_dir,
                               os.path.splitext(os.path.basename(notebook_path))[0] + '.md')
     
     # Load the system prompt

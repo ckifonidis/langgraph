@@ -7,3 +7,4 @@ code/generated/
 **/private_test_**/*
 *.vscode
 **/*.pyc
+__output__/
