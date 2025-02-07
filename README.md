@@ -1,19 +1,27 @@
 # LangGraph Recipes
 
-A collection of examples and tools using LangGraph for building conversational AI agents.
+A collection of examples and tools using LangGraph for building conversational AI agents and automated documentation workflows.
 
-## Tools
+## Features
 
-### Calculator
+### Notebook Auto-Documentation
+Located in `langgraph_recipes/notebook_autodoc/`, this feature provides automated documentation generation for Databricks notebooks:
+- Processes input Databricks notebooks from specified directories
+- Combines documentation using configurable prompts
+- Supports SQL table descriptions integration
+- Includes specialized agents for documentation and markdown combining
 
-A basic arithmetic calculator tool that can perform addition, subtraction, multiplication, and division operations.
+### Tools
 
-Location: `langgraph_recipes/tools/calculator.py`
+#### Calculator
+A basic arithmetic calculator tool for performing mathematical operations.
+
+Location: `langgraph_recipes/tools/calculator/calculator.py`
 
 Usage example:
 ```python
 from langgraph_recipes.tools.calculator import Calculator
-from langgraph_recipes.common.simple_graph_agent import Agent
+from langgraph_recipes.common.agents.agent_simple import Agent
 
 # Initialize the calculator tool
 calculator = Calculator()
@@ -32,20 +40,44 @@ Input schema:
 - `a`: First number
 - `b`: Second number
 
-See `langgraph_recipes/calculator_agent.py` for a complete example implementation.
+See `langgraph_recipes/recipe/calculator_agent.py` for a complete example implementation.
+
+#### File Listing
+Tools for file system operations and listings, located in `langgraph_recipes/tools/file_listing/`.
 
 ## Project Structure
 
 ```
 langgraph_recipes/
-├── tools/              # Custom tools implementations
-│   └── calculator.py   # Calculator tool
-├── common/             # Shared components
-│   ├── agent_state.py
-│   └── simple_graph_agent.py
-├── calculator_agent.py # Example calculator agent
-└── tool_agent.py      # Example search agent
+├── common/                 # Shared components
+│   ├── agent_state.py     # Agent state management
+│   └── agents/            # Base agent implementations
+├── notebook_autodoc/      # Notebook documentation tools
+│   ├── agents/           # Documentation specific agents
+│   ├── input/            # Input resources
+│   │   ├── notebooks/    # Source Databricks notebooks
+│   │   ├── prompts/      # Documentation prompts
+│   │   └── table_descriptions/ # SQL schema descriptions
+├── recipe/               # Example agent implementations
+│   ├── calculator_agent.py
+│   ├── chat_agent.py
+│   └── tool_agent.py
+├── tools/                # Tool implementations
+│   ├── calculator/      # Calculator tool
+│   └── file_listing/    # File system tools
+└── __init__.py
 ```
+
+## Requirements
+
+- Python >= 3.11
+- Dependencies:
+  - langgraph >= 0.2.68
+  - pydantic >= 2.10.6
+  - langchain-openai >= 0.3.2
+  - langchain-anthropic >= 0.3.4
+  - langchain-community >= 0.3.16
+  - python-dotenv >= 1.0.1
 
 ## Getting Started
 
@@ -61,4 +93,13 @@ OPENAI_API_KEY=your_key_here
 
 3. Run an example:
 ```bash
-poetry run python langgraph_recipes/calculator_agent.py
+poetry run python langgraph_recipes/recipe/calculator_agent.py
+```
+
+## Examples
+
+The project includes several example implementations:
+- Calculator agent (`recipe/calculator_agent.py`)
+- Chat agent (`recipe/chat_agent.py`)
+- Tool-using agent (`recipe/tool_agent.py`)
+- Databricks notebook documentation workflow (`notebook_autodoc/`)
